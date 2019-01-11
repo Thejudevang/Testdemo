@@ -9,6 +9,7 @@
 import UIKit
 import IQKeyboardManagerSwift
 
+@available(iOS 11.0, *)
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -20,7 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         IQKeyboardManager.shared.enable = true
         IQKeyboardManager.shared.shouldResignOnTouchOutside = true
         IQKeyboardManager.shared.enableAutoToolbar = true
-        
+        UIApplication.shared.isStatusBarHidden = false
         if UserDefaults.standard.value(forKey: "Logindetail") == nil
         {
             print("nil")
@@ -30,7 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let initialViewControlleripad : UIViewController = mainStoryboardIpad.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
             if let navigationController = self.window?.rootViewController as? UINavigationController
             {
-                navigationController.pushViewController(initialViewControlleripad, animated: false)
+                navigationController.pushViewController(initialViewControlleripad, animated: true)
             }
             else
             {

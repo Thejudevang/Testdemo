@@ -9,12 +9,14 @@
 import UIKit
 import SDWebImage
 
+@available(iOS 11.0, *)
 class HomeViewController: UIViewController,UITableViewDelegate,UITableViewDataSource  {
 
     @IBOutlet weak var listtable : UITableView!
     
     var listarr = [Dictionary<String,AnyObject>]()
     
+  
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBar.isHidden = false
@@ -23,12 +25,23 @@ class HomeViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
             let result = UserDefaults.standard.value(forKey: "Logindetail")
             listarr = result as! [Dictionary<String,AnyObject>]
         }
+        listtable.contentInsetAdjustmentBehavior = .automatic
         listtable.reloadData()
     }
     
-    
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
         self.navigationController?.navigationBar.isHidden = false
+        self.setNeedsStatusBarAppearanceUpdate()
+    }
+    
+    override var prefersStatusBarHidden : Bool {
+        return false
+    }
+    
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        self.view.layoutIfNeeded()
     }
     
 

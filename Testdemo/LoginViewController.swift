@@ -9,21 +9,22 @@
 import UIKit
 import Alamofire
 
+@available(iOS 11.0, *)
 class LoginViewController: UIViewController {
 
     @IBOutlet weak var emailtext: UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
-//        if UserDefaults.standard.value(forKey: "Logindetail") == nil
-//        {
-//            print("nil")
-//        }
-//        else{
-//            let mainview = self.storyboard?.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
-//            let nav = UINavigationController.init(rootViewController: mainview)
-//            self.present(nav, animated:true, completion: nil)
-//        }
-        // Do any additional setup after loading the view.
+
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        self.setNeedsStatusBarAppearanceUpdate()
+    }
+    
+    override var prefersStatusBarHidden : Bool {
+        return false
     }
     
 
@@ -72,8 +73,7 @@ class LoginViewController: UIViewController {
                             print(data)
                             UserDefaults.standard.set(data, forKey: "Logindetail")
                             let mainview = self.storyboard?.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
-                            let nav = UINavigationController.init(rootViewController: mainview)
-                            self.present(nav, animated:true, completion: nil)
+                           self.navigationController?.pushViewController(mainview, animated: true)
                         }
                         break
                         
